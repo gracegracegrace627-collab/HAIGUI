@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>海龟汤小游戏</title>
+<style>
+body {font-family:sans-serif;text-align:center;margin-top:80px;background:#eef;}
+input,button{font-size:1.2em;padding:6px;margin-top:10px;}
+</style>
+</head>
+<body>
+<h2>海龟汤题目</h2>
+<p>一个男人走进餐厅点了海龟汤，喝了一口就哭了，为什么？</p>
+
+<input id="ans" placeholder="输入你的答案...">
+<button onclick="check()">提交</button>
+<p id="result"></p>
+
+<script>
+function check(){
+  const a=document.getElementById("ans").value.trim();
+  const truth="他曾经在海难中吃了妻子的肉"; // 真相
+  document.getElementById("result").innerText=
+    a.includes("海难")||a.includes("妻")?"✅ 你解开真相了！":"❌ 再想想～";
+}
+</script>
+</body>
+</html>
