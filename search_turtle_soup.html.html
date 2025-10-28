@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>海龟汤 · 搜索式解谜</title>
+<style>
+body {
+  font-family: "Microsoft YaHei", sans-serif;
+  background: radial-gradient(circle at center, #fdfbfb, #ebedee);
+  text-align: center;
+  padding-top: 8%;
+}
+.container {
+  display: inline-block;
+  background: #fff;
+  padding: 30px 50px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.15);
+  width: 420px;
+}
+input, button {
+  font-size: 1.1em;
+  padding: 6px 10px;
+  margin: 8px;
+}
+#log {
+  margin-top: 15px;
+  text-align: left;
+  font-size: 1em;
+  max-height: 240px;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fafafa;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>🕵️‍♂️ 搜索式海龟汤</h2>
+  <p>题目：<br>一个男人走进餐厅点了海龟汤，喝了一口后立刻哭了。</p>
+  
+  <input id="keyword" placeholder="输入你想搜索的词..." size="28">
+  <button onclick="search()">搜索线索</button>
+  <div id="log"></div>
+</div>
+
+<script>
+const clues = {
+  "餐厅": "他在餐厅点的确实是‘海龟汤’。",
+  "汤": "他以前似乎喝过类似的味道……",
+  "海龟": "他想确认自己喝的是否真的是海龟汤。",
+  "哭": "这不是感动的泪水，而是震惊与悲伤。",
+  "海": "他曾经经历过一次海上的灾难。",
+  "海难": "是的，那次海难中有人死去……",
+  "妻子": "他失去了妻子……但似乎不止是失去……",
+  "人肉": "真相似乎和‘吃了某个人’有关。"
+};
+
+let solved = false;
+
+function search(){
+  const kw = document.getElementById("keyword").value.trim();
+  const log = document.getElementById("log");
+  
+  if(!kw) return;
+  
+  if(solved){
+    log.innerHTML += `<p>🧩 你已经解开了谜题！刷新页面重新开始。</p>`;
+    return;
+  }
+
+  if(clues[kw]){
+    log.innerHTML += `<p>🔍 关键词【${kw}】：${clues[kw]}</p>`;
+    if(kw === "海难" || kw === "妻子" || kw === "人肉"){
+      log.innerHTML += `<p style="color:green;font-weight:bold;">✅ 真相揭晓：他在海难中吃了妻子的肉。再次喝到那熟悉的味道后崩溃痛哭。</p>`;
+      solved = true;
+    }
+  } else {
+    log.innerHTML += `<p>❌ 没有找到与【${kw}】相关的线索。</p>`;
+  }
+  
+  document.getElementById("keyword").value = "";
+  log.scrollTop = log.scrollHeight;
+}
+</script>
+</body>
+</html>
